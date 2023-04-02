@@ -22,8 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if (scene as? UIWindowScene) == nil {
             return
         }
-        
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A12B7DB229D9D0BE00008AAE /* VideoGameProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12B7DAC29D9D0BE00008AAE /* VideoGameProvider.swift */; };
+		A12B7DB329D9D0BE00008AAE /* CoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A12B7DAE29D9D0BE00008AAE /* CoreDataContainer.xcdatamodeld */; };
+		A12B7DB829D9D6F600008AAE /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12B7DB729D9D6F600008AAE /* FavoriteViewController.swift */; };
+		A12B7DBB29D9D70800008AAE /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12B7DBA29D9D70800008AAE /* FavoriteViewModel.swift */; };
 		A132BC37296B01A700C6F4A7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132BC36296B01A700C6F4A7 /* HomeViewModel.swift */; };
 		A132BC3B296BAE6100C6F4A7 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132BC39296BAE6100C6F4A7 /* GameTableViewCell.swift */; };
 		A132BC3C296BAE6100C6F4A7 /* GameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A132BC3A296BAE6100C6F4A7 /* GameTableViewCell.xib */; };
@@ -30,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A12B7DAC29D9D0BE00008AAE /* VideoGameProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoGameProvider.swift; sourceTree = "<group>"; };
+		A12B7DAF29D9D0BE00008AAE /* VideoGameEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoGameEntity.xcdatamodel; sourceTree = "<group>"; };
+		A12B7DB729D9D6F600008AAE /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		A12B7DBA29D9D70800008AAE /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		A132BC36296B01A700C6F4A7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A132BC39296BAE6100C6F4A7 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		A132BC3A296BAE6100C6F4A7 /* GameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameTableViewCell.xib; sourceTree = "<group>"; };
@@ -65,6 +73,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A12B7DAA29D9D0BE00008AAE /* Local Data Source */ = {
+			isa = PBXGroup;
+			children = (
+				A12B7DAB29D9D0BE00008AAE /* Core Data */,
+				A12B7DAD29D9D0BE00008AAE /* Model */,
+			);
+			path = "Local Data Source";
+			sourceTree = "<group>";
+		};
+		A12B7DAB29D9D0BE00008AAE /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				A12B7DAC29D9D0BE00008AAE /* VideoGameProvider.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		A12B7DAD29D9D0BE00008AAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A12B7DAE29D9D0BE00008AAE /* CoreDataContainer.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A12B7DB629D9D6C500008AAE /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				A12B7DB929D9D6FA00008AAE /* ViewModel */,
+				A12B7DB729D9D6F600008AAE /* FavoriteViewController.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		A12B7DB929D9D6FA00008AAE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A12B7DBA29D9D70800008AAE /* FavoriteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		A132BC34296B019800C6F4A7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +192,7 @@
 		A15DAB68296AC3A600D31118 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A12B7DB629D9D6C500008AAE /* Favorite */,
 				A19C45AD29CBAC5D003290B9 /* Detail Game */,
 				A132BC34296B019800C6F4A7 /* Home */,
 				A15DAB58296AC30500D31118 /* Main.storyboard */,
@@ -170,6 +221,7 @@
 		A15DAB6B296AC3DA00D31118 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A12B7DAA29D9D0BE00008AAE /* Local Data Source */,
 				A15DAB6C296AC3DD00D31118 /* Remote Data Source */,
 			);
 			path = Data;
@@ -343,7 +395,10 @@
 				A15DAB57296AC30500D31118 /* HomeViewController.swift in Sources */,
 				A15DAB76296AC95800D31118 /* ObjectMapper.swift in Sources */,
 				A1CDD36029CC0E9300315872 /* StarViewCreator.swift in Sources */,
+				A12B7DB829D9D6F600008AAE /* FavoriteViewController.swift in Sources */,
+				A12B7DB329D9D0BE00008AAE /* CoreDataContainer.xcdatamodeld in Sources */,
 				A132BC3B296BAE6100C6F4A7 /* GameTableViewCell.swift in Sources */,
+				A12B7DBB29D9D70800008AAE /* FavoriteViewModel.swift in Sources */,
 				A19C45B029CBAC89003290B9 /* DetailGameViewController.swift in Sources */,
 				A1F1437A29CBBA8100988F0E /* DetailGameViewModel.swift in Sources */,
 				A15DAB79296AC96B00D31118 /* VideoGame.swift in Sources */,
@@ -353,6 +408,7 @@
 				A15DAB53296AC30500D31118 /* AppDelegate.swift in Sources */,
 				A15DAB70296AC40D00D31118 /* GameServicesNetworkModel.swift in Sources */,
 				A15DAB73296AC74D00D31118 /* VideoGameResponse.swift in Sources */,
+				A12B7DB229D9D0BE00008AAE /* VideoGameProvider.swift in Sources */,
 				A15DAB55296AC30500D31118 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,6 +627,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A12B7DAE29D9D0BE00008AAE /* CoreDataContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A12B7DAF29D9D0BE00008AAE /* VideoGameEntity.xcdatamodel */,
+			);
+			currentVersion = A12B7DAF29D9D0BE00008AAE /* VideoGameEntity.xcdatamodel */;
+			path = CoreDataContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A15DAB47296AC30500D31118 /* Project object */;
 }

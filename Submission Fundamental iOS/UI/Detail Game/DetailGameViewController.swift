@@ -10,6 +10,7 @@ import UIKit
 class DetailGameViewController: UIViewController {
     
     public var gameId: Int = 0
+    public var isFromFavoriteScreen = false
 
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var loadingView: UIActivityIndicatorView!
@@ -22,6 +23,7 @@ class DetailGameViewController: UIViewController {
     @IBOutlet private weak var developersLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var ratingStackView: UIStackView!
+    @IBOutlet weak var errorLabel: UILabel!
     
     private let viewModel = DetailGameViewModel(gameServicesNetworkModel: GameServicesDefaultNetworkModel())
     private var gameRating = 0.0
@@ -31,7 +33,7 @@ class DetailGameViewController: UIViewController {
 
         self.tabBarController?.tabBar.isHidden = true
         bindObserver()
-        viewModel.retrieveGameDetail(id: gameId)
+        viewModel.viewDidLoad(id: gameId, isFromFavoriteScreen: isFromFavoriteScreen)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,17 +52,47 @@ class DetailGameViewController: UIViewController {
         }
         
         viewModel.errorObservable = { [weak self] errorMessage in
-//            self?.configureView(isError: true, errorMessage: errorMessage)
+            self?.configureView(isError: true, errorMessage: errorMessage)
         }
         
         viewModel.gameObservable = { [weak self] game in
             self?.setView(game: game)
         }
+        
+        viewModel.isFavoriteObservable = { [weak self] isFavorite in
+            self?.configureNavBarItem(isFavorite: isFavorite)
+        }
+        
+        viewModel.isDeleteObservable = { [weak self] isDelete in
+            self?.showAlert(isDelete: isDelete)
+        }
     }
     
-    private func configureView(isLoading: Bool) {
-        scrollView.isHidden = isLoading
-        loadingView.isHidden = !isLoading
+    private func configureNavBarItem(isFavorite: Bool) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: isFavorite ? "heart.fill" : "heart"),
+            style: .plain,
+            target: self,
+            action: #selector(onFavoriteIconTapped)
+        )
+    }
+    
+    @objc private func onFavoriteIconTapped() {
+        viewModel.updateVideoGameFavoriteStatus()
+    }
+    
+    private func configureView(isLoading: Bool = false, isError: Bool = false, errorMessage: String = "") {
+        if isLoading {
+            loadingView.isHidden = false
+            scrollView.isHidden = true
+            errorLabel.isHidden = true
+            errorLabel.text = nil
+        } else {
+            loadingView.isHidden = true
+            scrollView.isHidden = isError
+            errorLabel.isHidden = !isError
+            errorLabel.text = errorMessage
+        }
     }
     
     private func setView(game: DetailVideoGame) {
@@ -86,5 +118,15 @@ class DetailGameViewController: UIViewController {
         descriptionLabel.text = game.description
         genresLabel.text = game.genresInString
         developersLabel.text = "Developers: " + game.developersInString
+    }
+    
+    private func showAlert(isDelete: Bool) {
+        let alert = UIAlertController(
+            title: "Success",
+            message: isDelete ? "Video Game Unfavorited." : "Video Game Favorited.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }
