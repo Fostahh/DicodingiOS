@@ -9,10 +9,6 @@ import Foundation
 
 struct ListVideoGameResponse: Codable {
     let results: [VideoGameResponse]
-    
-    enum CodingKeys: String, CodingKey {
-        case results
-    }
 }
 
 struct VideoGameResponse: Codable {

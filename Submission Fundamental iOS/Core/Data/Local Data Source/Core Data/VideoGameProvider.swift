@@ -213,19 +213,4 @@ class VideoGameProvider {
         
         videoGameEntity.addToEsrbRating(esrbRatingEntity)
     }
-    
-//    func deleteAllVideoGame(completion: @escaping() -> Void) {
-//        let taskContext = newTaskContext()
-//        taskContext.perform {
-//            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DetailVideoGameEntity")
-//            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-//            batchDeleteRequest.resultType = .resultTypeCount
-//            if let batchDeleteResult = try? taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult {
-//                if batchDeleteResult.result != nil {
-//                    print("Delete all success")
-//                    completion()
-//                }
-//            }
-//        }
-//    }
 }
