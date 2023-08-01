@@ -14,6 +14,7 @@ struct DetailVideoGame {
     let esrbRating: ESRBRating
     let genres: [Genre]
     let developers: [Developer]
+    var isFavorite: Bool = false
     
     var ageRestriction: String {
         switch esrbRating.id {

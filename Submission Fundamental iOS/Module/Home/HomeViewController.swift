@@ -15,8 +15,17 @@ class HomeViewController: UIViewController {
     @IBOutlet private weak var loadingView: UIActivityIndicatorView!
     @IBOutlet private weak var errorLabel: UILabel!
     
-    private let viewModel = HomeViewModel(gameServicesNetworkModel: GameServicesDefaultNetworkModel())
-    private var cancellable = [AnyCancellable]()
+    private let viewModel: HomeViewModel
+    private var cancellables: Set<AnyCancellable> = []
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,23 +37,32 @@ class HomeViewController: UIViewController {
     }
     
     private func bindObserver() {
-        viewModel.loadingObservable = { [weak self] isLoading in
-            self?.configureView(isLoading: isLoading)
-            if isLoading {
-                self?.loadingView.startAnimating()
-            } else {
-                self?.loadingView.stopAnimating()
-            }
-        }
+        viewModel.loadingObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] isLoading in
+                self?.configureView(isLoading: isLoading)
+                if isLoading {
+                    self?.loadingView.startAnimating()
+                } else {
+                    self?.loadingView.stopAnimating()
+                }
+            })
+            .store(in: &cancellables)
         
-        viewModel.errorObservable = { [weak self] errorMessage in
-            self?.configureView(isError: true, errorMessage: errorMessage)
-        }
-        
-        viewModel.gamesObservable = { [weak self] _ in
-            self?.configureView()
-            self?.gameTableView.reloadData()
-        }
+        viewModel.gamesObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.configureView()
+                self?.gameTableView.reloadData()
+            })
+            .store(in: &cancellables)
+
+        viewModel.errorObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] errorMessage in
+                self?.configureView(isError: true, errorMessage: errorMessage)
+            })
+            .store(in: &cancellables)
         
         bindForSearchBarText()
     }
@@ -62,7 +80,7 @@ class HomeViewController: UIViewController {
                     self?.viewModel.retrieveGames()
                 }
             })
-            .store(in: &cancellable)
+            .store(in: &cancellables)
     }
     
     private func configureSearchBar() {
@@ -124,8 +142,10 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = DetailGameViewController(nibName: "DetailGameViewController", bundle: nil)
-        detailVC.gameId = viewModel.getVideoGame(indexPath: indexPath.row).id
+        let detailVC = DetailGameViewController(
+            viewModel: DetailGameViewModel(useCase: Injection.init().provideDetail()),
+            gameId: viewModel.getVideoGame(indexPath: indexPath.row).id
+        )
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

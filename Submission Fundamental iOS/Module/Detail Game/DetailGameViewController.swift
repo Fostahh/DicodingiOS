@@ -6,11 +6,9 @@
 //
 
 import UIKit
+import Combine
 
 class DetailGameViewController: UIViewController {
-    
-    public var gameId: Int = 0
-    public var isFromFavoriteScreen = false
 
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var loadingView: UIActivityIndicatorView!
@@ -25,8 +23,27 @@ class DetailGameViewController: UIViewController {
     @IBOutlet private weak var ratingStackView: UIStackView!
     @IBOutlet weak var errorLabel: UILabel!
     
-    private let viewModel = DetailGameViewModel(gameServicesNetworkModel: GameServicesDefaultNetworkModel())
+    private let viewModel: DetailGameViewModel
+    private let gameId: Int
+    private let isFromFavoriteScreen: Bool
+
     private var gameRating = 0.0
+    private var cancellables: Set<AnyCancellable> = []
+    
+    init(
+        viewModel: DetailGameViewModel,
+        gameId: Int,
+        isFromFavoriteScreen: Bool = false
+    ) {
+        self.viewModel = viewModel
+        self.gameId = gameId
+        self.isFromFavoriteScreen = isFromFavoriteScreen
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,30 +59,45 @@ class DetailGameViewController: UIViewController {
     }
     
     private func bindObserver() {
-        viewModel.loadingObservable = { [weak self] isLoading in
-            self?.configureView(isLoading: isLoading)
-            if isLoading {
-                self?.loadingView.startAnimating()
-            } else {
-                self?.loadingView.stopAnimating()
-            }
-        }
+        viewModel.loadingObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] isLoading in
+                self?.configureView(isLoading: isLoading)
+                if isLoading {
+                    self?.loadingView.startAnimating()
+                } else {
+                    self?.loadingView.stopAnimating()
+                }
+            })
+            .store(in: &cancellables)
+
+        viewModel.errorObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] errorMessage in
+                self?.configureView(isError: true, errorMessage: errorMessage)
+            })
+            .store(in: &cancellables)
+
+        viewModel.gameObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] game in
+                self?.setView(game: game)
+            })
+            .store(in: &cancellables)
         
-        viewModel.errorObservable = { [weak self] errorMessage in
-            self?.configureView(isError: true, errorMessage: errorMessage)
-        }
-        
-        viewModel.gameObservable = { [weak self] game in
-            self?.setView(game: game)
-        }
-        
-        viewModel.isFavoriteObservable = { [weak self] isFavorite in
-            self?.configureNavBarItem(isFavorite: isFavorite)
-        }
-        
-        viewModel.isDeleteObservable = { [weak self] isDelete in
-            self?.showAlert(isDelete: isDelete)
-        }
+        viewModel.isFavoriteObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] isFavorite in
+                self?.configureNavBarItem(isFavorite: isFavorite)
+            })
+            .store(in: &cancellables)
+
+        viewModel.showAlertObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] (_, message) in
+                self?.showAlert(message: message)
+            })
+            .store(in: &cancellables)
     }
     
     private func configureNavBarItem(isFavorite: Bool) {
@@ -120,10 +152,10 @@ class DetailGameViewController: UIViewController {
         developersLabel.text = "Developers: " + game.developersInString
     }
     
-    private func showAlert(isDelete: Bool) {
+    private func showAlert(message: String) {
         let alert = UIAlertController(
             title: "Success",
-            message: isDelete ? "Video Game Unfavorited." : "Video Game Favorited.",
+            message: message,
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default))

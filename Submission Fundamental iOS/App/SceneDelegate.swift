@@ -19,10 +19,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        if (scene as? UIWindowScene) == nil {
-            return
+        if let windowScene = scene as? UIWindowScene{
+            let window = UIWindow(windowScene: windowScene)
+            
+            let homeviewModel = HomeViewModel(useCase: Injection.init().provideHome())
+            let homeViewController = HomeViewController(viewModel: homeviewModel)
+            let homeNavigationController = UINavigationController(rootViewController: homeViewController)
+            
+            let favoriteViewModel = FavoriteViewModel(useCase: Injection.init().provideFavorite())
+            let favoriteViewController = FavoriteViewController(viewModel: favoriteViewModel)
+            let favoriteNavigationController = UINavigationController(rootViewController: favoriteViewController)
+            
+            let tabBarController = UITabBarController()
+            tabBarController.viewControllers = [homeNavigationController, favoriteNavigationController, BiodataViewController()]
+            
+            tabBarController.viewControllers?[0].title = "Games"
+            tabBarController.viewControllers?[0].tabBarItem.image = UIImage(systemName: "gamecontroller")
+            
+            tabBarController.viewControllers?[1].title = "Favorite"
+            tabBarController.viewControllers?[1].tabBarItem.image = UIImage(systemName: "heart.fill")
+            
+            tabBarController.viewControllers?[2].title = "Profile"
+            tabBarController.viewControllers?[2].tabBarItem.image = UIImage(systemName: "person")
+            
+            window.rootViewController = tabBarController
+            window.makeKeyAndVisible()
+            self.window = window
         }
     }
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

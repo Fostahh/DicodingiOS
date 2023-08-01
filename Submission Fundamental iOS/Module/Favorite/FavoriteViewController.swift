@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class FavoriteViewController: UIViewController {
     
@@ -14,7 +15,17 @@ class FavoriteViewController: UIViewController {
     @IBOutlet private weak var informationLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     
-    private let viewModel = FavoriteViewModel()
+    private let viewModel: FavoriteViewModel
+    private var cancellables: Set<AnyCancellable> = []
+    
+    init(viewModel: FavoriteViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,23 +52,32 @@ class FavoriteViewController: UIViewController {
     }
     
     private func bindObserver() {
-        viewModel.loadingObservable = { [weak self] isLoading in
-            self?.configureView(isLoading: isLoading)
-            if isLoading {
-                self?.loadingView.startAnimating()
-            } else {
-                self?.loadingView.stopAnimating()
-            }
-        }
+        viewModel.loadingObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] isLoading in
+                self?.configureView(isLoading: isLoading)
+                if isLoading {
+                    self?.loadingView.startAnimating()
+                } else {
+                    self?.loadingView.stopAnimating()
+                }
+            })
+            .store(in: &cancellables)
         
-        viewModel.errorObservable = { [weak self] errorMessage in
-            self?.configureView(isError: true, errorMessage: errorMessage)
-        }
-        
-        viewModel.gamesObservable = { [weak self] _ in
-            self?.configureView()
-            self?.tableView.reloadData()
-        }
+        viewModel.gamesObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.configureView()
+                self?.tableView.reloadData()
+            })
+            .store(in: &cancellables)
+
+        viewModel.errorObservable
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] errorMessage in
+                self?.configureView(isError: true, errorMessage: errorMessage)
+            })
+            .store(in: &cancellables)
     }
     
     private func configureView(isLoading: Bool = false, isError: Bool = false, errorMessage: String = "") {
@@ -101,9 +121,11 @@ extension FavoriteViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = DetailGameViewController(nibName: "DetailGameViewController", bundle: nil)
-        detailVC.gameId = viewModel.getVideoGame(indexPath: indexPath.row).id
-        detailVC.isFromFavoriteScreen = true
+        let detailVC = DetailGameViewController(
+            viewModel: DetailGameViewModel(useCase: Injection.init().provideDetail()),
+            gameId: viewModel.getVideoGame(indexPath: indexPath.row).id,
+            isFromFavoriteScreen: true
+        )
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
