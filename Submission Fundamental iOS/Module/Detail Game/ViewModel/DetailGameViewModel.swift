@@ -19,7 +19,7 @@ class DetailGameViewModel {
     
     // MARK: Private Properties
     private let useCase: DetailUseCase
-    private var videoGame: DetailVideoGame? = nil
+    private var videoGame: DetailVideoGame?
     private var cancellables: Set<AnyCancellable> = []
     
     init(useCase: DetailUseCase) {

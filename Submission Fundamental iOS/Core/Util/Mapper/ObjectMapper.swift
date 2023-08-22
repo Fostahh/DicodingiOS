@@ -115,5 +115,4 @@ public final class ObjectMapper {
         return videoGameEntity
     }
     
-    
 }

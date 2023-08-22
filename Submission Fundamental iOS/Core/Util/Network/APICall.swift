@@ -9,7 +9,18 @@ import Foundation
 
 struct API {
     static let baseUrl = "https://api.rawg.io/api/games"
-    static let key = "e2037d96ffc84a45b3d9b74e9e3d5fea"
+    static var key: String {
+        // 1
+        guard let filePath = Bundle.main.path(forResource: "Info", ofType: "plist") else {
+            fatalError("Couldn't find file 'TMDB-Info.plist'.")
+        }
+        // 2
+        let plist = NSDictionary(contentsOfFile: filePath)
+        guard let value = plist?.object(forKey: "API_KEY") as? String else {
+            fatalError("Couldn't find key 'API_KEY' in 'Info.plist'.")
+        }
+        return value
+    }
 }
 
 protocol Endpoint {

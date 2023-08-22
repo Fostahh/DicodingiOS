@@ -73,7 +73,7 @@ final class GameRepository: GameRepositoryProtocol {
     
     func getFavoriteGames() -> AnyPublisher<[VideoGame], Error> {
         return self.local.getVideoGames()
-            .map{ ObjectMapper.mapListVideoGameResponseToListVideoGameDomain(videoGames: $0) }
+            .map { ObjectMapper.mapListVideoGameResponseToListVideoGameDomain(videoGames: $0) }
             .eraseToAnyPublisher()
     }
 }
