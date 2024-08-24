@@ -11,36 +11,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var flowController: MainFlowController?
     
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = window
         
-        let homeviewModel = HomeViewModel(useCase: Injection.init().provideHome())
-        let homeViewController = HomeViewController(viewModel: homeviewModel)
-        let homeNavigationController = UINavigationController(rootViewController: homeViewController)
+        flowController = MainFlowController(window: window)
+        flowController?.start()
         
-        let favoriteViewModel = FavoriteViewModel(useCase: Injection.init().provideFavorite())
-        let favoriteViewController = FavoriteViewController(viewModel: favoriteViewModel)
-        let favoriteNavigationController = UINavigationController(rootViewController: favoriteViewController)
-        
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeNavigationController, favoriteNavigationController, BiodataViewController()]
-        
-        tabBarController.viewControllers?[0].title = "Games"
-        tabBarController.viewControllers?[0].tabBarItem.image = UIImage(systemName: "gamecontroller")
-        
-        tabBarController.viewControllers?[1].title = "Favorite"
-        tabBarController.viewControllers?[1].tabBarItem.image = UIImage(systemName: "heart.fill")
-        
-        tabBarController.viewControllers?[2].title = "Profile"
-        tabBarController.viewControllers?[2].tabBarItem.image = UIImage(systemName: "person")
-        
-        self.window?.rootViewController = tabBarController
-        self.window?.makeKeyAndVisible()
+        window.makeKeyAndVisible()
         
         return true
     }

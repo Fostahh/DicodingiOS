@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="GameTableViewCell" customModule="Common">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="144"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="350" height="144"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7D-n9-BgR">
+                        <rect key="frame" x="16" y="16" width="131" height="112"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mKd-vc-Z8K">
+                                <rect key="frame" x="0.0" y="0.0" width="66.5" height="112"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="AMN-jr-0Wc">
+                                <rect key="frame" x="74.5" y="0.0" width="56.5" height="52"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JpW-Fq-qkL">
+                                        <rect key="frame" x="0.0" y="0.0" width="56.5" height="25.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjS-Rk-dU8">
+                                        <rect key="frame" x="0.0" y="29.5" width="56.5" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sRZ-jx-kxU" userLabel="Rating Stack View">
+                                <rect key="frame" x="72.5" y="60" width="170" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" placeholder="YES" id="Mcw-Lo-6us"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sRZ-jx-kxU" secondAttribute="trailing" id="GER-0Q-uoj"/>
+                            <constraint firstItem="sRZ-jx-kxU" firstAttribute="top" secondItem="AMN-jr-0Wc" secondAttribute="bottom" constant="8" id="Kwy-fC-31M"/>
+                            <constraint firstItem="AMN-jr-0Wc" firstAttribute="leading" secondItem="mKd-vc-Z8K" secondAttribute="trailing" constant="8" id="PL1-xQ-xjC"/>
+                            <constraint firstItem="mKd-vc-Z8K" firstAttribute="leading" secondItem="z7D-n9-BgR" secondAttribute="leading" id="Pen-ut-4Ic"/>
+                            <constraint firstItem="mKd-vc-Z8K" firstAttribute="width" secondItem="z7D-n9-BgR" secondAttribute="width" multiplier="0.5" constant="1" id="Qhb-NP-XJG"/>
+                            <constraint firstAttribute="bottom" secondItem="mKd-vc-Z8K" secondAttribute="bottom" id="SkN-PR-6PL"/>
+                            <constraint firstItem="sRZ-jx-kxU" firstAttribute="leading" secondItem="mKd-vc-Z8K" secondAttribute="trailing" constant="6" id="TcU-yI-TNM"/>
+                            <constraint firstItem="mKd-vc-Z8K" firstAttribute="top" secondItem="z7D-n9-BgR" secondAttribute="top" id="ZVV-Tv-jdO"/>
+                            <constraint firstAttribute="bottom" secondItem="sRZ-jx-kxU" secondAttribute="bottom" id="kEP-hz-Ebc"/>
+                            <constraint firstItem="AMN-jr-0Wc" firstAttribute="top" secondItem="mKd-vc-Z8K" secondAttribute="top" id="xTa-Es-eWe"/>
+                            <constraint firstAttribute="trailing" secondItem="AMN-jr-0Wc" secondAttribute="trailing" id="zap-SU-yRi"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="z7D-n9-BgR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="0Mk-YM-yvZ"/>
+                    <constraint firstAttribute="trailing" secondItem="z7D-n9-BgR" secondAttribute="trailing" constant="16" id="Lk7-g1-oJn"/>
+                    <constraint firstAttribute="bottom" secondItem="z7D-n9-BgR" secondAttribute="bottom" constant="16" id="WNc-eb-WJk"/>
+                    <constraint firstItem="z7D-n9-BgR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Xrg-o1-B6V"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="gameImageView" destination="mKd-vc-Z8K" id="U2n-sg-fty"/>
+                <outlet property="gameReleaseLabel" destination="vjS-Rk-dU8" id="9lt-Cy-kxc"/>
+                <outlet property="gameTitleLabel" destination="JpW-Fq-qkL" id="4Z7-IJ-T0h"/>
+                <outlet property="ratingStackView" destination="sRZ-jx-kxU" id="P5v-TI-EXR"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="98"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

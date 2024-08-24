@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Mohammaad Azri Khairuddin on 24/08/24.
+  
+*/
+
+// MARK: - TabBar ViewController Title
+"tab_bar_title_home" = "Games";
+"tab_bar_title_favorite" = "Favorite";
+"tab_bar_title_profile" = "Profile";
+
+// MARK: - Home
+"search_bar_placeholder" = "Search Video Games";

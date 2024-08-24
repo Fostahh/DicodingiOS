@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var flowController: MainFlowController?
 
     func scene(
         _ scene: UIScene,
@@ -19,33 +20,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        if let windowScene = scene as? UIWindowScene {
-            let window = UIWindow(windowScene: windowScene)
-            
-            let homeviewModel = HomeViewModel(useCase: Injection.init().provideHome())
-            let homeViewController = HomeViewController(viewModel: homeviewModel)
-            let homeNavigationController = UINavigationController(rootViewController: homeViewController)
-            
-            let favoriteViewModel = FavoriteViewModel(useCase: Injection.init().provideFavorite())
-            let favoriteViewController = FavoriteViewController(viewModel: favoriteViewModel)
-            let favoriteNavigationController = UINavigationController(rootViewController: favoriteViewController)
-            
-            let tabBarController = UITabBarController()
-            tabBarController.viewControllers = [homeNavigationController, favoriteNavigationController, BiodataViewController()]
-            
-            tabBarController.viewControllers?[0].title = "Games"
-            tabBarController.viewControllers?[0].tabBarItem.image = UIImage(systemName: "gamecontroller")
-            
-            tabBarController.viewControllers?[1].title = "Favorite"
-            tabBarController.viewControllers?[1].tabBarItem.image = UIImage(systemName: "heart.fill")
-            
-            tabBarController.viewControllers?[2].title = "Profile"
-            tabBarController.viewControllers?[2].tabBarItem.image = UIImage(systemName: "person")
-            
-            window.rootViewController = tabBarController
-            window.makeKeyAndVisible()
-            self.window = window
-        }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        
+        flowController = MainFlowController(window: window)
+        flowController?.start()
+        
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
