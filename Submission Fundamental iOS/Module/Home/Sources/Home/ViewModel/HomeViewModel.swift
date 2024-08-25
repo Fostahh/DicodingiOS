@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Core
+import Common
 
 public class HomeViewModel {
     
@@ -52,6 +53,16 @@ public class HomeViewModel {
     
     func getVideoGame(indexPath: Int) -> VideoGame {
         videoGames[indexPath]
+    }
+    
+    func getCellViewParam(indexPath: Int) -> GameTableViewCell.ViewParam {
+        let game = videoGames[indexPath]
+        return GameTableViewCell.ViewParam(
+            rating: game.rating,
+            backgroundImage: game.backgroundImage,
+            name: game.name,
+            released: game.released
+        )
     }
     
     func retrieveGamesByName(query: String) {

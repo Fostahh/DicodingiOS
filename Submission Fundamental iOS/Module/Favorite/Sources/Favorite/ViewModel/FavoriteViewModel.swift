@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Core
+import Common
 
 public class FavoriteViewModel {
     
@@ -56,6 +57,16 @@ public class FavoriteViewModel {
     
     func getVideoGame(indexPath: Int) -> VideoGame {
         videoGames[indexPath]
+    }
+    
+    func getCellViewParam(indexPath: Int) -> GameTableViewCell.ViewParam {
+        let game = videoGames[indexPath]
+        return GameTableViewCell.ViewParam(
+            rating: game.rating,
+            backgroundImage: game.backgroundImage,
+            name: game.name,
+            released: game.released
+        )
     }
     
 }

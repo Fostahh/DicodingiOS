@@ -116,9 +116,9 @@ extension FavoriteViewController: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as GameTableViewCell
-        let game = viewModel.getVideoGame(indexPath: indexPath.row)
+        let viewParam = viewModel.getCellViewParam(indexPath: indexPath.row)
         cell.selectionStyle = .none
-        cell.configureView(game: game)
+        cell.configureView(viewParam: viewParam)
         return cell
     }
     

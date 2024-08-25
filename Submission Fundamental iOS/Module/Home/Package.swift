@@ -16,8 +16,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire", from: "5.0.0"),
         .package(url: "https://github.com/realm/realm-swift", branch: "master"),
-        .package(url: "https://github.com/Fostahh/MIDE-Core.git", exact: "1.0.0"),
-        .package(path: "../Common")
+        .package(path: "../Common"),
+        .package(url: "https://github.com/Fostahh/MIDE-Core.git", exact: "1.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -27,8 +27,8 @@ let package = Package(
             dependencies: [
                 .product(name: "Alamofire", package: "alamofire"),
                 .product(name: "RealmSwift", package: "realm-swift"),
-                .product(name: "Core", package: "mide-core"),
-                "Common"
+                "Common",
+                .product(name: "Core", package: "mide-core")
             ]
         ),
         .testTarget(

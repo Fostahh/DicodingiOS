@@ -6,9 +6,21 @@
 //
 
 import UIKit
-import Core
 
 public class GameTableViewCell: UITableViewCell {
+    
+    // MARK: - View Param
+    public struct ViewParam {
+        let rating: Double
+        let backgroundImage, name, released: String
+        
+        public init(rating: Double, backgroundImage: String, name: String, released: String) {
+            self.rating = rating
+            self.backgroundImage = backgroundImage
+            self.name = name
+            self.released = released
+        }
+    }
     
     // MARK: - IBOutlets
     @IBOutlet private weak var gameImageView: UIImageView!
@@ -25,12 +37,12 @@ public class GameTableViewCell: UITableViewCell {
     }
     
     // MARK: Public Methods
-    public func configureView(game: VideoGame) {
-        gameRating = round(game.rating * 10) / 10.0
-        loadImage(urlString: game.backgroundImage)
-        gameTitleLabel.text = game.name
-        gameReleaseLabel.text = game.released
-        setRatingView(with: game)
+    public func configureView(viewParam: GameTableViewCell.ViewParam) {
+        gameRating = round(viewParam.rating * 10) / 10.0
+        loadImage(urlString: viewParam.backgroundImage)
+        gameTitleLabel.text = viewParam.name
+        gameReleaseLabel.text = viewParam.released
+        setRatingView()
     }
     
     // MARK: Private Methods
@@ -40,7 +52,7 @@ public class GameTableViewCell: UITableViewCell {
         }
     }
     
-    private func setRatingView(with game: VideoGame) {
+    private func setRatingView() {
         ratingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         for _ in 1...5 {

@@ -1,6 +1,7 @@
 disabled_rules:
 - trailing_whitespace
 - force_cast
+- static_over_final_class
 opt_in_rules:
 - empty_count
 - empty_string
@@ -31,3 +32,8 @@ cyclomatic_complexity:
     warning: 15
     error: 25
 reporter: "xcode"
+type_name:
+  min_length: 1 # only warning
+  max_length: # warning and error
+    warning: 50
+    error: 60

@@ -22,8 +22,8 @@ let package = Package(
         .target(
             name: "Favorite",
             dependencies: [
-                .product(name: "Core", package: "mide-core"),
-                "Common"
+                "Common",
+                .product(name: "Core", package: "mide-core")
             ]
         ),
         .testTarget(
