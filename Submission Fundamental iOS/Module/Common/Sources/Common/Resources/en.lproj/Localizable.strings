@@ -13,3 +13,13 @@
 
 // MARK: - Home
 "search_bar_placeholder" = "Search Video Games";
+
+// MARK: - Favorite
+"nav_item_title_favorite" = "Your Favorite Games";
+
+// MARK: - Detail Game
+"detail_game_developer_text" = "Developers: %@";
+"detail_game_alert_title" = "Success";
+"detail_game_alert_message_favorited" = "Game favorited successfully.";
+"detail_game_alert_message_unfavorited" = "Game unfavorited.";
+"detail_game_alert_action_title" = "OK";

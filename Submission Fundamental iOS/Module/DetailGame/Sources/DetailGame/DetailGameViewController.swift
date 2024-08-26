@@ -15,7 +15,7 @@ public class DetailGameViewController: UIViewController {
     // MARK: - Init
     public init(viewModel: DetailGameViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: "DetailGameViewController", bundle: Bundle.module)
+        super.init(nibName: "DetailGameViewController", bundle: .module)
     }
     
     required init?(coder: NSCoder) {
@@ -121,11 +121,11 @@ public class DetailGameViewController: UIViewController {
     private func setView(game: DetailVideoGame) {
         gameRating = round(game.rating * 10) / 10.0
         
-        bannerImageView.loadFromUrl(urlString: game.backgroundImageAdditional) { [weak self] image in
+        bannerImageView.loadImageFromUrl(urlString: game.backgroundImageAdditional) { [weak self] image in
             self?.bannerImageView.image = image
         }
         
-        backgroundImageView.loadFromUrl(urlString: game.backgroundImage) { [weak self] image in
+        backgroundImageView.loadImageFromUrl(urlString: game.backgroundImage) { [weak self] image in
             self?.backgroundImageView.image = image
         }
         
@@ -140,16 +140,21 @@ public class DetailGameViewController: UIViewController {
         ageRestrictionLabel.text = game.ageRestriction
         descriptionLabel.text = game.description
         genresLabel.text = game.genresInString
-        developersLabel.text = "Developers: " + game.developersInString
+        developersLabel.text = "detail_game_developer_text".localizedFormat(game.developersInString)
     }
     
     private func showAlert(message: String) {
         let alert = UIAlertController(
-            title: "Success",
+            title: "detail_game_alert_title".localized(),
             message: message,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(
+            UIAlertAction(
+                title: "detail_game_alert_action_title".localized(),
+                style: .default
+            )
+        )
         self.present(alert, animated: true)
     }
 }

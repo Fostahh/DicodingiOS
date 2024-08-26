@@ -12,7 +12,7 @@ public class BiodataViewController: UIViewController {
     
     // MARK: - Init
     public init() {
-        super.init(nibName: "BiodataViewController", bundle: Bundle.module)
+        super.init(nibName: "BiodataViewController", bundle: .module)
     }
     
     required init?(coder: NSCoder) {

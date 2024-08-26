@@ -15,6 +15,7 @@
                 <outlet property="gameSearchBar" destination="oxt-C8-Bal" id="JwN-og-7Fu"/>
                 <outlet property="gameTableView" destination="SsN-7Q-EZ5" id="IFy-6w-LGJ"/>
                 <outlet property="loadingView" destination="eZz-kZ-xAx" id="WhF-A3-UT7"/>
+                <outlet property="statusBarView" destination="KDG-nd-dzI" id="BlG-8g-GV7"/>
                 <outlet property="view" destination="Cfb-M5-D9Q" id="t7j-qu-1PU"/>
             </connections>
         </placeholder>
@@ -23,6 +24,10 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDG-nd-dzI">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="59"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SsN-7Q-EZ5">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -46,13 +51,17 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="w8j-s6-nld" firstAttribute="centerY" secondItem="Cfb-M5-D9Q" secondAttribute="centerY" id="01M-dN-vux"/>
+                <constraint firstItem="KDG-nd-dzI" firstAttribute="leading" secondItem="lrY-DM-CJ4" secondAttribute="leading" id="6cG-D8-aWF"/>
                 <constraint firstItem="eZz-kZ-xAx" firstAttribute="centerX" secondItem="Cfb-M5-D9Q" secondAttribute="centerX" id="6eX-U1-eaZ"/>
+                <constraint firstItem="lrY-DM-CJ4" firstAttribute="trailing" secondItem="KDG-nd-dzI" secondAttribute="trailing" id="8hd-gc-BKO"/>
                 <constraint firstItem="lrY-DM-CJ4" firstAttribute="bottom" secondItem="SsN-7Q-EZ5" secondAttribute="bottom" id="GhS-dq-Ult"/>
                 <constraint firstItem="SsN-7Q-EZ5" firstAttribute="top" secondItem="Q0Z-Uz-pnD" secondAttribute="bottom" id="KDO-dm-q4v"/>
                 <constraint firstItem="Q0Z-Uz-pnD" firstAttribute="top" secondItem="Cfb-M5-D9Q" secondAttribute="top" id="PyF-a3-j8y"/>
+                <constraint firstItem="SsN-7Q-EZ5" firstAttribute="top" secondItem="KDG-nd-dzI" secondAttribute="bottom" id="XY1-qG-AaQ"/>
                 <constraint firstItem="lrY-DM-CJ4" firstAttribute="trailing" secondItem="w8j-s6-nld" secondAttribute="trailing" constant="24" id="aI2-Jl-Lq1"/>
                 <constraint firstAttribute="trailing" secondItem="Q0Z-Uz-pnD" secondAttribute="trailing" id="d3B-SI-nP8"/>
                 <constraint firstItem="Q0Z-Uz-pnD" firstAttribute="leading" secondItem="Cfb-M5-D9Q" secondAttribute="leading" id="fv0-Ok-pHi"/>
+                <constraint firstItem="KDG-nd-dzI" firstAttribute="top" secondItem="Q0Z-Uz-pnD" secondAttribute="top" id="gxX-PU-utG"/>
                 <constraint firstItem="lrY-DM-CJ4" firstAttribute="trailing" secondItem="SsN-7Q-EZ5" secondAttribute="trailing" id="kOs-Rd-CSF"/>
                 <constraint firstItem="eZz-kZ-xAx" firstAttribute="centerY" secondItem="Cfb-M5-D9Q" secondAttribute="centerY" id="pxB-Gu-1Bb"/>
                 <constraint firstItem="w8j-s6-nld" firstAttribute="leading" secondItem="lrY-DM-CJ4" secondAttribute="leading" constant="24" id="tV4-TW-jUp"/>

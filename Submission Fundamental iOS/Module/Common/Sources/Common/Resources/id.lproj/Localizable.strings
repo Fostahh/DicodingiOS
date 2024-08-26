@@ -13,3 +13,13 @@
 
 // MARK: - Home
 "search_bar_placeholder" = "Cari Permainan";
+
+// MARK: - Favorite
+"nav_item_title_favorite" = "Game Favorit Kamu";
+
+// MARK: - Detail Game
+"detail_game_developer_text" = "Pengembang: %@";
+"detail_game_alert_title" = "Sukses";
+"detail_game_alert_message_favorited" = "Game berhasil difavoritkan.";
+"detail_game_alert_message_unfavorited" = "Game tidak difavoritkan lagi.";
+"detail_game_alert_action_title" = "OK";

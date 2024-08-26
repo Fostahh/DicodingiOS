@@ -22,7 +22,7 @@ public class FavoriteViewController: UIViewController {
     // MARK: - Init
     public init(viewModel: FavoriteViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: "FavoriteViewController", bundle: Bundle.module)
+        super.init(nibName: "FavoriteViewController", bundle: .module)
     }
     
     required init?(coder: NSCoder) {
@@ -41,15 +41,14 @@ public class FavoriteViewController: UIViewController {
     // MARK: - Override Methods
     public override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.title = "Your Favorite Games"
+        
+        self.navigationItem.title = "nav_item_title_favorite".localized()
         configureTableView()
         bindObserver()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         viewModel.retrieveGames()
     }
     
@@ -94,17 +93,10 @@ public class FavoriteViewController: UIViewController {
     }
     
     private func configureView(isLoading: Bool = false, isError: Bool = false, errorMessage: String = "") {
-        if isLoading {
-            loadingView.isHidden = false
-            tableView.isHidden = true
-            informationLabel.isHidden = true
-            informationLabel.text = nil
-        } else {
-            loadingView.isHidden = true
-            tableView.isHidden = isError
-            informationLabel.isHidden = !isError
-            informationLabel.text = errorMessage
-        }
+        loadingView.isHidden = !isLoading
+        tableView.isHidden = isLoading ? true : isError
+        informationLabel.isHidden = isLoading ? true : !isError
+        informationLabel.text = isLoading ? nil : errorMessage
     }
 }
 
@@ -125,6 +117,7 @@ extension FavoriteViewController: UITableViewDataSource {
 }
 
 extension FavoriteViewController: UITableViewDelegate {
+    
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         150
     }
@@ -132,4 +125,5 @@ extension FavoriteViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.onNavigationEvent?(.detailVideoGame(viewModel.getVideoGame(indexPath: indexPath.row).id))
     }
+    
 }

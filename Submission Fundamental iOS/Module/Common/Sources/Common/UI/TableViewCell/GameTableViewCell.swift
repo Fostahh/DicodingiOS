@@ -31,11 +31,6 @@ public class GameTableViewCell: UITableViewCell {
     // MARK: - Private Properties
     private var gameRating = 0.0
     
-    // MARK: - Override Methods
-    public override func prepareForReuse() {
-        gameImageView.image = nil
-    }
-    
     // MARK: Public Methods
     public func configureView(viewParam: GameTableViewCell.ViewParam) {
         gameRating = round(viewParam.rating * 10) / 10.0
@@ -47,7 +42,7 @@ public class GameTableViewCell: UITableViewCell {
     
     // MARK: Private Methods
     private func loadImage(urlString: String) {
-        gameImageView.loadFromUrl(urlString: urlString) { [weak self] image in
+        gameImageView.loadImageFromUrl(urlString: urlString) { [weak self] image in
             self?.gameImageView.image = image
         }
     }

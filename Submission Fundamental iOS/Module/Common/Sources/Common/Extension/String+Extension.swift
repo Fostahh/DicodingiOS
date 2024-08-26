@@ -14,4 +14,9 @@ public extension String {
         return title
     }
     
+    func localizedFormat(_ args: CVarArg...) -> String {
+        let title = NSLocalizedString(self, bundle: .module, comment: "")
+        return String.localizedStringWithFormat(title, args)
+    }
+    
 }

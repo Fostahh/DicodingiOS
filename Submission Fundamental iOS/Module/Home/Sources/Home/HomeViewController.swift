@@ -21,7 +21,7 @@ public class HomeViewController: UIViewController {
     // MARK: - Init
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: "HomeViewController", bundle: Bundle.module)
+        super.init(nibName: "HomeViewController", bundle: .module)
     }
     
     required init?(coder: NSCoder) {
@@ -29,6 +29,7 @@ public class HomeViewController: UIViewController {
     }
 
     // MARK: - IBOutlets
+    @IBOutlet private weak var statusBarView: UIView!
     @IBOutlet private var gameSearchBar: UISearchBar!
     @IBOutlet private weak var gameTableView: UITableView!
     @IBOutlet private weak var loadingView: UIActivityIndicatorView!
@@ -98,6 +99,7 @@ public class HomeViewController: UIViewController {
     
     private func configureSearchBar() {
         navigationItem.titleView = gameSearchBar
+        statusBarView.backgroundColor = gameSearchBar.backgroundColor
         gameSearchBar.searchTextField.leftView?.tintColor = .systemBlue
         gameSearchBar.searchTextField.backgroundColor = .white
         gameSearchBar.backgroundImage = UIImage()
