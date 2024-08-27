@@ -61,7 +61,7 @@ public class DetailGameViewModel {
                         videoGame.isFavorite = false
                         self?.videoGame = videoGame
                         self?.isFavoriteObservable.send(false)
-                        self?.showAlertObservable.send((true, "detail_game_alert_message_favorited".localized()))
+                        self?.showAlertObservable.send((true, "detail_game_alert_message_unfavorited".localized()))
                     }
                 })
                 .store(in: &cancellables)
@@ -81,7 +81,7 @@ public class DetailGameViewModel {
                         videoGame.isFavorite = true
                         self?.videoGame = videoGame
                         self?.isFavoriteObservable.send(true)
-                        self?.showAlertObservable.send((true, "detail_game_alert_message_unfavorited".localized()))
+                        self?.showAlertObservable.send((true, "detail_game_alert_message_favorited".localized()))
                     }
                 })
                 .store(in: &cancellables)
