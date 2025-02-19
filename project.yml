@@ -1,0 +1,70 @@
+name: Submission Fundamental iOS
+
+options:
+  deploymentTarget:
+      iOS: "15.5"
+
+packages:
+  Alamofire:
+    url: https://github.com/Alamofire/Alamofire
+    from: 5.0.0
+  Realm:
+    url: https://github.com/realm/realm-swift
+    branch: master
+
+targets:
+  Submission Fundamental iOS:
+    type: application
+    platform: iOS
+    supportedDestinations: [iOS]
+    sources:
+      - Submission Fundamental iOS
+    dependencies:
+      - package: Alamofire
+      - package: Realm
+    info:
+      path: /Users/900539/Desktop/DicodingiOS/Submission Fundamental iOS/File System/Info.plist
+      properties:
+        API_KEY: e2037d96ffc84a45b3d9b74e9e3d5fea
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: NO
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication: [
+              { 
+                UISceneConfigurationName: Default Configuration,
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+              }
+            ]
+    settings:
+      TARGETED_DEVICE_FAMILY: 1
+    postBuildScripts:
+      - name: Run Script Swiftlint
+        script: |
+          if [[ "$(uname -m)" == arm64 ]]; then
+            export PATH="/opt/homebrew/bin:$PATH"
+          fi
+
+          if which swiftlint > /dev/null; then
+            swiftlint
+          else
+            echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+          fi
+
+schemes:
+  Submission Fundamental iOS:
+    build:
+      targets:
+        Submission Fundamental iOS: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: true
+    profile:
+      config: Debug
+    analyze:
+      config: Debug
+    archive:
+      config: Debug
+      postActions:
+        - settingsTarget: Submission Fundamental iOS
