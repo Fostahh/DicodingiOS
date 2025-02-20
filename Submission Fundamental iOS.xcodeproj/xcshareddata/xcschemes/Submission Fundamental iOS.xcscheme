@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1340"
-   version = "1.3">
+   LastUpgradeVersion = "1430"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      runPostActionsOnFailure = "NO">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A15DAB4E296AC30500D31118"
+               BlueprintIdentifier = "91B7EB774998556468015DB9"
                BuildableName = "Submission Fundamental iOS.app"
                BlueprintName = "Submission Fundamental iOS"
                ReferencedContainer = "container:Submission Fundamental iOS.xcodeproj">
@@ -26,9 +27,22 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "NO">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "91B7EB774998556468015DB9"
+            BuildableName = "Submission Fundamental iOS.app"
+            BlueprintName = "Submission Fundamental iOS"
+            ReferencedContainer = "container:Submission Fundamental iOS.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
       </Testables>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -44,12 +58,14 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A15DAB4E296AC30500D31118"
+            BlueprintIdentifier = "91B7EB774998556468015DB9"
             BuildableName = "Submission Fundamental iOS.app"
             BlueprintName = "Submission Fundamental iOS"
             ReferencedContainer = "container:Submission Fundamental iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -61,12 +77,14 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A15DAB4E296AC30500D31118"
+            BlueprintIdentifier = "91B7EB774998556468015DB9"
             BuildableName = "Submission Fundamental iOS.app"
             BlueprintName = "Submission Fundamental iOS"
             ReferencedContainer = "container:Submission Fundamental iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
